@@ -10,7 +10,7 @@ import { errorLogger, requestLogger } from '../../utils/logging';
 import { todoCreateCommandHandler } from './create-handler';
 import { todoDeleteCommandHandler } from './delete-handler';
 import { todoQueryHandler } from './query-handler';
-import { inMemoryTodoRepository } from './repository';
+import { postgresqlTodoRepository } from './repository';
 import { todoRouter } from './router';
 import { todoUpdateCommandHandler } from './update-handler';
 
@@ -28,7 +28,7 @@ const env = {
 export const startTodoApi = (logger: Logger, lifecycle: LifecycleManager) => {
   const databasePool = getDbConnection(env.databaseConfig, logger);
 
-  const repository = inMemoryTodoRepository();
+  const repository = postgresqlTodoRepository(databasePool);
   const queryTodo = todoQueryHandler(repository);
   const createTodo = todoCreateCommandHandler(repository, () => uuid());
   const updateTodo = todoUpdateCommandHandler(repository);
