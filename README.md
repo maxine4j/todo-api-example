@@ -1,4 +1,4 @@
-# Web API
+# Todo API
 
 Simple CRUD todo api written using the following technologies:
 

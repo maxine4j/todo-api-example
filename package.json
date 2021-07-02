@@ -1,8 +1,8 @@
 {
-  "name": "web-api",
+  "name": "todo-api",
   "version": "1.0.0",
   "main": "app.ts",
-  "repository": "git@github.com:tim-ings/web-api.git",
+  "repository": "git@github.com:tim-ings/todo-api-example.git",
   "author": "Tim Ings <tim@tim-ings.com>",
   "license": "GPL3",
   "private": true,
