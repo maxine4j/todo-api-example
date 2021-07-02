@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  web:
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - migration
+      - db
+    environment:
+      PORT: "8080"
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+
+  db:
+    image: postgres:13.3-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  migration:
+    build: ./flyway
+    restart: on_failure
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_NAME: postgres
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - db
